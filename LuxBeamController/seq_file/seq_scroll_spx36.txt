@@ -1,0 +1,377 @@
+#-------------------------------------------------------------------------------
+# This sequence file has a 178 tics round trip from TRIG to TRIG.
+# This file require that the TIC period is set to 295 ns.
+# The minimum supported trig period is 178*295 ns = 52.51 us
+# Maximum frequency => 19.04 KHz
+# 
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# Register input description
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+AssignVarReg  ScrollStep      0 1  # +: Retur stripes:  -: forward stripes
+AssignVarReg  ScrollDirection 3 1  # 1: Retur stripes: -1: forward stripes
+AssignVarReg  NoOfFrames      4 1  # 
+AssignVarReg  ScrollStepAbs   5 1  # Absolute value of scrollstep
+AssignVarReg BufferOffset     6 1 # Buffer start at 0,7200
+AssignVarReg  NoOfRows        7 1  # 
+AssignVarReg  AssignedMirrorShake 8 1
+
+# Presets
+AssignVar  Zero             0 1
+AssignVar  One              1 1
+AssignVar  NoOfDMDrows   1080 1    
+AssignVar  NoOfDMDrowsNeg -1080 1  
+AssignVar  RowsPrGrp       29 1 # Each subframe is loaded into 29 rows
+AssignVar  RowsPrGrp*      30 1 # After 6 subframes a black row is inserted by jumping one row extra
+
+AssignVar StartInum    940 1 #1000 1 # First subframe is 5 at INUM offset 5*200 = 1000
+AssignVar StepInum    -188 1 # -200 1 # We start with subframe 5 (@inum=5*200) and decrement subframe, i.e step down 200 INUMs
+AssignVar StepInumGrp 2068 1 #2200 1 # After 6 subframes we step up to next group (i.e. from 0 to 11), i.e. step up 11*200 INUMs
+AssignVar RestSigned 0 1
+# -----------------------------------------------------------------------------------------------------
+# --------------------------------  M I R R O R   S H A K E  ------------------------------------------
+# -----------------------------------------------------------------------------------------------------
+Label MirrorShake                                       1
+  LoadRow      Zero NoOfDMDrows Zero Zero         173  # (1080*40ns)*(4tics/us)=172.8
+  ResetGlobal              20   
+JumpIf AssignedMirrorShake > Zero MirrorShake           1
+
+
+# -----------------------------------------------------------------------------------------------------
+# Clear DMD memory
+ClearSingle 0 10   # Clear DMD row 0 to 71
+ClearSingle 1 10
+ClearSingle 2 10
+ClearSingle 3 10
+ClearSingle 4 10
+ClearSingle 5 10
+ClearSingle 6 10
+ClearSingle 7 10
+ClearSingle 8 10
+ClearSingle 9 10
+ClearSingle 10 10
+ClearSingle 11 10
+ClearSingle 12 10
+ClearSingle 13 10
+ClearSingle 14 10 # Clear DMD row 1008 to 1079
+
+
+# -----------------------------------------------------------------------------------------------------
+# -----------------------------------------  S E T U P   ----------------------------------------------
+# -----------------------------------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------------------------------
+# Setup StartInum and MemStartRow
+# -----------------------------------------------------------------------------------------------------
+AssignVar StartImageNo   0 1
+Add       StartImageNo   BufferOffset 1
+AssignVar RowOffset      0 1 
+AssignVar incImageNo     0 1
+AssignVar incMemRow      0 1
+
+# -----------------------------------------------------------------------------------------------------
+# If ScrollDirection is 1 (backward) then =>  StartImageNo=BufferOffset,              RowOffset=0
+# If ScrollDirection is -1 (forward) then =>  StartImageNo=BufferOffset+NoOfFrames-2  RowOffset=1080+NoOfRows
+# The next loop (setup) is executed once if ScrollDirection is 1 and twice if ScrollDirection is -1
+
+AssignVar SetupCount 0               1
+Add       SetupCount ScrollDirection 1
+
+Label Setup 1
+  Add StartImageNo incImageNo 1  # After first round is StartImageNo = BufferOffset and incImageNo = 0
+  Add incImageNo   NoOfFrames 1  # Modify Image to the last image in the sequence
+  Add incImageNo   -2         1  # Subtract one since inum starts counting at zero, and one more since we add to 1080 MemRow
+  Add RowOffset    incMemRow  1  # After first round RowOffset is 0, after second round RowOffset become 1080
+  Add incMemRow    1080       1  #      
+  Add incMemRow    NoOfRows   1 
+  Add SetupCount   1          1
+JumpIf SetupCount < One Setup 1
+
+
+# -----------------------------------------------------------------------------------------------------
+# Calculate a signed version of ScrollStep, i.e. ScrollStepSigned = Absolute(ScrollStep)
+
+AssignVar SetupCount       0 1
+AssignVar ScrollStepSigned 0 1
+
+Label Setup2 1
+  Add ScrollStepSigned ScrollDirection 1
+  Add SetupCount 1 1
+JumpIf SetupCount < ScrollStep Setup2 1
+  
+
+# ---------------------------------------------------------------------------------------------------------
+# -------------------------------- I M A G E   S C R O L L I N G ------------------------------------------
+# ---------------------------------------------------------------------------------------------------------
+AssignVar  ScrollCount         0 1  # Count up to DMD height (1080)
+AssignVar  MemStartRow         0 1
+Add        MemStartRow RowOffset 1  # Either zero or 1080
+
+# ---------------------------------------------------------------------------------------------------------
+# -------------------------------- L E D   S O F T  S T A R T  ------------------------------------------
+# ---------------------------------------------------------------------------------------------------------
+ResetGlobal  10      # Set mirrors according to memory 
+Trig 0 2 0
+Add MemStartRow ScrollStep 1  # Plus or minus 1
+Add ScrollCount ScrollStepAbs 1
+
+LightSetWord 1 4    # Set light on   1.18us duration
+LightSetWord 0 34   # Set light off 10.03us duration
+LightSetWord 1 8    # Set light on   2.38us duration
+LightSetWord 0 34   # Set light off 10.03us duration
+LightSetWord 1 12   # Set light on   3.54us duration
+LightSetWord 0 34   # Set light off 10.03us duration
+LightSetWord 1 16   # Set light on   4.72us duration
+LightSetWord 0 34   # Set light off 10.03us duration
+Trig 0 2 0
+Add MemStartRow ScrollStep 1  # Plus or minus 1
+Add ScrollCount ScrollStepAbs 1
+
+LightSetWord 1 20   # Set light on   5.90us duration
+LightSetWord 0 34   # Set light off 10.03us duration
+LightSetWord 1 24   # Set light on   7.08us duration
+LightSetWord 0 34   # Set light off 10.03us duration
+LightSetWord 1 28   # Set light on   8.26us duration
+LightSetWord 0 34   # Set light off 10.03us duration
+Trig 0 2 0
+Add MemStartRow ScrollStep 1  # Plus or minus 1
+Add ScrollCount ScrollStepAbs 1
+
+LightSetWord 1 32   # Set light on   9.44us duration
+LightSetWord 0 34   # Set light off 10.03us duration
+LightSetWord 1 36   # Set light on  10.62us duration
+LightSetWord 0 34   # Set light off 10.03us duration
+Trig 0 2 0
+Add MemStartRow ScrollStep 1  # Plus or minus 1
+Add ScrollCount ScrollStepAbs 1
+
+LightSetWord 0 40   # Set light on  11.80us duration
+LightSetWord 0 34   # Set light off 10.03us duration
+LightSetWord 1 44   # Set light on  12.98us duration
+LightSetWord 0 34   # Set light off 10.03us duration
+Trig 0 2 0
+Add MemStartRow ScrollStep 1  # Plus or minus 1
+Add ScrollCount ScrollStepAbs 1
+
+LightSetWord 1 48   # Set light on  14.16us duration
+LightSetWord 0 34   # Set light off 10.03us duration
+LightSetWord 1 52   # Set light on  15.93us duration
+LightSetWord 0 34   # Set light off 10.03us duration
+Trig 0 2 0
+Add MemStartRow ScrollStep 1  # Plus or minus 1
+Add ScrollCount ScrollStepAbs 1
+
+##################################################################
+Label Wait5     5
+Label Wait17    17   # These two waits replace the obsolete LoopValue (must accommodate enough time from reset to load)
+
+    ######################## 0 ###################################
+    AssignVar DmdStartRow  15                         1
+    AssignVar inum         0                          1
+    Add       inum         StartInum                  1
+    Add       inum         StartImageNo               1  
+    LoadRow   DmdStartRow  RowsPrGrp inum MemStartRow 1   # Loading 29 rows takes 29*40ns/295ns => 3.93 tics
+
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1   
+
+    ########################## 1 #################################
+    Add       inum         StepInumGrp                1  
+    Add       DmdStartRow RowsPrGrp*                  1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+   
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+   
+   ############################ 2 ###############################
+    Add       inum         StepInumGrp                1  
+    Add       DmdStartRow RowsPrGrp*                  1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+   
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+   
+   ############################# 3 ##############################
+    Add       inum         StepInumGrp                1  
+    Add       DmdStartRow RowsPrGrp*                  1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+   
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+                                                      
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+                                                      
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+                                                      
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+                                                      
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+   
+   ############################## 4 #############################
+    Add       inum         StepInumGrp                1  
+    Add       DmdStartRow RowsPrGrp*                  1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+   
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+                                                      
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+                                                     
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+                                                      
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+                                                      
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+   
+   ############################### 5 ############################
+    Add       inum         StepInumGrp                1  
+    Add       DmdStartRow RowsPrGrp*                  1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+   
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+                                                      
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+                                                      
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+                                                      
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+                                                      
+    Add       inum         StepInum                   1  
+    Add       DmdStartRow RowsPrGrp                   1
+    Add       MemStartRow RowsPrGrp                   1
+    LoadRow   DmdStartRow RowsPrGrp inum MemStartRow  1
+   
+    Add     MemStartRow -1015      1  # Jump back 29*35 = 1015
+    Add     MemStartRow ScrollStep 1  # Pluss or minus
+    ###########################################################
+
+  Trig 0 2 0 
+
+  ################### RST start here - count TU until first load #########################
+  ResetGlobal      1               # Enable LED on 2TU = 500 ns after reset
+  LightPulseWord  15 1             # Pulse LED
+  Add ScrollCount ScrollStepAbs 1
+  AssignVar  Rest 0 1
+  Add Rest ScrollCount 1
+  Add Rest NoOfDMDrowsNeg 1
+  Mult RestSigned Rest ScrollDirection 1
+JumpIf ScrollCount < NoOfDMDrows Wait5 1
+
+  AssignVar ScrollCount  Rest               1
+  Add       StartImageNo ScrollDirection 1
+  AssignVar MemStartRow  RestSigned               1
+  Add       MemStartRow  RowOffset       1
+Jump Wait17 1
+

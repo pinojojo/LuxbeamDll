@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="LuxBeamInvoke.h" />
+    <ClInclude Include="LuxBeamController.h">
+      <Filter>Lux</Filter>
+    </ClInclude>
+    <ClInclude Include="LuxHelper.h">
+      <Filter>Lux</Filter>
+    </ClInclude>
+    <ClInclude Include="LuxImage.h">
+      <Filter>Lux</Filter>
+    </ClInclude>
+    <ClInclude Include="Sequencer.h">
+      <Filter>Lux</Filter>
+    </ClInclude>
+    <ClInclude Include="UDPReceiver.h">
+      <Filter>Lux</Filter>
+    </ClInclude>
+    <ClInclude Include="UDPSender.h">
+      <Filter>Lux</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LuxBeamController.cpp">
+      <Filter>Lux</Filter>
+    </ClCompile>
+    <ClCompile Include="LuxHelper.cpp">
+      <Filter>Lux</Filter>
+    </ClCompile>
+    <ClCompile Include="LuxImage.cpp">
+      <Filter>Lux</Filter>
+    </ClCompile>
+    <ClCompile Include="Sequencer.cpp">
+      <Filter>Lux</Filter>
+    </ClCompile>
+    <ClCompile Include="LuxBeamInvoke.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Lux">
+      <UniqueIdentifier>{d13bcd48-4b0b-4802-888a-804df96272f3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="seq_file\mode_scroll.txt" />
+    <Text Include="seq_file\seq_scroll_spx36.txt" />
+  </ItemGroup>
+</Project>

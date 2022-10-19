@@ -1,0 +1,10 @@
+D:\dev-dmd-litho\lux_dll\UseDll\UseDll\bin\Debug\UseDll.exe.config
+D:\dev-dmd-litho\lux_dll\UseDll\UseDll\bin\Debug\UseDll.exe
+D:\dev-dmd-litho\lux_dll\UseDll\UseDll\bin\Debug\UseDll.pdb
+D:\dev-dmd-litho\lux_dll\UseDll\UseDll\obj\Debug\UseDll.csproj.AssemblyReference.cache
+D:\dev-dmd-litho\lux_dll\UseDll\UseDll\obj\Debug\UseDll.Form1.resources
+D:\dev-dmd-litho\lux_dll\UseDll\UseDll\obj\Debug\UseDll.Properties.Resources.resources
+D:\dev-dmd-litho\lux_dll\UseDll\UseDll\obj\Debug\UseDll.csproj.GenerateResource.cache
+D:\dev-dmd-litho\lux_dll\UseDll\UseDll\obj\Debug\UseDll.csproj.CoreCompileInputs.cache
+D:\dev-dmd-litho\lux_dll\UseDll\UseDll\obj\Debug\UseDll.exe
+D:\dev-dmd-litho\lux_dll\UseDll\UseDll\obj\Debug\UseDll.pdb

@@ -1,0 +1,6 @@
+﻿  LuxBeamCLI.cpp
+D:\dev-dmd-litho\lux_dll\UseDll\CLI\LuxBeamCLI.cpp(35,30): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  .NETFramework,Version=v4.0.AssemblyAttributes.cpp
+  Generating Code...
+  LuxBeamCLI.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  CLI.vcxproj -> D:\dev-dmd-litho\lux_dll\UseDll\x64\Debug\CLI.dll

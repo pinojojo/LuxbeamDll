@@ -1,0 +1,71 @@
+﻿  LuxBeamController.cpp
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
+  - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
+D:\dev\boost_1_79_0\boost\bind.hpp(41): message : The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(55,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(92,58): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(106,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(115,75): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(169,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(190,102): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(212,98): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(235,98): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(259,86): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(283,86): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(308,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(332,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(369,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(386,88): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(407,58): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(423,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(435,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(474,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(488,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(502,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(516,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(530,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(543,57): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(562,102): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(582,102): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(604,102): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(615,98): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  LuxBeamInvoke.cpp
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
+  - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
+D:\dev\boost_1_79_0\boost\bind.hpp(41): message : The practice of declaring the Bind placeholders (_1, _2, ...) in the global namespace is deprecated. Please use <boost/bind/bind.hpp> + using namespace boost::placeholders, or define BOOST_BIND_GLOBAL_PLACEHOLDERS to retain the current behavior.
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamInvoke.cpp(65,56): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  LuxHelper.cpp
+  LuxImage.cpp
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(16,39): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(20,40): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(51,32): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(55,33): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(89,31): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(93,32): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(150,50): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(158,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(166,54): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(171,50): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(202,30): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(206,31): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(235,31): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(239,32): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(252,34): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(253,34): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(263,31): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(267,32): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(289,31): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(293,32): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxImage.cpp(317,29): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Sequencer.cpp
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\Sequencer.cpp(23,41): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\Sequencer.cpp(27,38): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(694): warning C4715: 'LuxBeamController::CheckReply': not all control paths return a value
+D:\dev-dmd-litho\lux_dll\UseDll\LuxBeamController\LuxBeamController.cpp(660): warning C4715: 'LuxBeamController::CheckReplayOK': not all control paths return a value
+     Creating library D:\dev-dmd-litho\lux_dll\UseDll\x64\Debug\LuxBeamController.lib and object D:\dev-dmd-litho\lux_dll\UseDll\x64\Debug\LuxBeamController.exp
+  LuxBeamController.vcxproj -> D:\dev-dmd-litho\lux_dll\UseDll\x64\Debug\LuxBeamController.dll

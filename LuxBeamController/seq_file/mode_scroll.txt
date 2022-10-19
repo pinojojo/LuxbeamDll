@@ -1,0 +1,35 @@
+# Variables
+AssignVar MemStartRow		0                                   		1
+AssignVar DmdStartRow		0                                   		1
+AssignVar Inum        		0                                   		1
+AssignVar BlkInum        	1                                   		1				# By default, position inum 1 stores a black image
+AssignVar NumRows    		1080                                		1
+AssignVar ZeroZero		    0											1
+AssignVar FrameIndex		0											1
+AssignVar ExposureTime		1000										1
+AssignVar TriggerCounter    0											1
+AssignVar LongImageRow	    10800										1
+
+# Exposure Loop
+Label             			StartHere                           		1
+LoadRow           			DmdStartRow NumRows Inum MemStartRow 		173				# (1080*40ns)*(4tics/us) = 172.8 tics
+ResetGlobal					                                			4000			# MOD1 # (250ns/tick) 1ms
+Add							FrameIndex 1					            1
+JumpIf						FrameIndex < ExposureTime StartHere			1
+AssignVar FrameIndex		0											1				# After Exposure, Reset the counter FrameIndex
+
+
+# After Exposure loop. Start black Loop
+Label             			BlkStartHere                           		1
+LoadRow           			DmdStartRow NumRows BlkInum MemStartRow 	173				# (1080*40ns)*(4tics/us) = 172.8
+ResetGlobal					                                			4000			# MOD2 unit: 1ms
+Trig						0 1                                         0				# Wait until a Trigger come in. first 0: postive-edge triggering second 1: electrical signal
+Add							TriggerCounter 1                            1				# 
+Add							MemStartRow 1                               1				# each trigger 
+JumpIf						MemStartRow < LongImageRow StartHere		1				# If not finished all Long Image, go back to exposure next image 			
+
+# Ending
+Label             			EndHere                           			1				# Endless loop of a black image
+LoadRow           			DmdStartRow NumRows BlkInum MemStartRow 	173				# Display black image
+ResetGlobal					                                			4000			
+Jump						EndHere										1				# End line Of This file must be a 'Jump' or 'JumpIf' 

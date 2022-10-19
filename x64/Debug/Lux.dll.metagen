@@ -1,0 +1,27 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly Lux, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class LuxBeamCLI: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Connect(): PrivateScope, Public, HideBySig
+    DisConnect(): PrivateScope, Public, HideBySig
+    CheckLastReply(): PrivateScope, Public, HideBySig
+    SetImageType(): PrivateScope, Public, HideBySig
+    SetImageSize(Int32): PrivateScope, Public, HideBySig
+    SetWorkingMode(Int32): PrivateScope, Public, HideBySig
+    ReLoadSequenceFile(): PrivateScope, Public, HideBySig
+    SetHoldingTime(Single): PrivateScope, Public, HideBySig
+    StartSequence(): PrivateScope, Public, HideBySig
+    StopSequence(): PrivateScope, Public, HideBySig
+    ResetSequence(): PrivateScope, Public, HideBySig
+    UnResetSequence(): PrivateScope, Public, HideBySig
+    ResetSequenceNumberCounter(): PrivateScope, Public, HideBySig
+    LoadImageFromFile(String, Int32): PrivateScope, Public, HideBySig
+    LoadImageFromBytes(Byte[], Int32, Int32): PrivateScope, Public, HideBySig
+    LoadWhite(Int32): PrivateScope, Public, HideBySig
+    LoadBlack(Int32): PrivateScope, Public, HideBySig
